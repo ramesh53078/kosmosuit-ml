@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaPipe Pose</title>
+</head>
+<body>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    <!-- <img src="/kosmosuit-ml/video_feed" width="640" height="480"> -->
+    <!-- <p>Activity Status: <span id="activityStatus"></span></p> -->
+    
+<!-- <style>
+    mark {
+  font-weight: bold;
+}
+video {
+  border: 1px solid gray;
+}
+.mirror {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+.leftside {
+  display: inline-block;
+  padding-right: 20px;
+}
+.rightside {
+  display: inline-block;
+  padding-left: 20px;
+  border-left: 1px solid #eee;
+}
+
+</style>
+<h1>video - capturing webcam</h1>
+<p><mark>controls:</mark><p>
+<p>
+  <button onclick="startWebcam();">Start WebCam</button>
+  <button onclick="stopWebcam();">Stop WebCam</button> 
+  <button onclick="takeSnapshot();">Take Snapshot</button> <br>
+  <button onclick="pauseVideo();">Pause Video</button>
+  <button onclick="resumeVideo();">Resume Video</button> 
+  <input id="mirrorCheckbox" onclick="toggleMirror();" type="checkbox"> Mirror
+</p>
+<div class="leftside">
+  <p><mark>video:</mark></p>
+  <video id="myVideo" width="400" height="300"></video>
+</div>
+<div class="rightside">
+  <p><mark>screenshot:</mark></p>
+  <canvas  id="myCanvas" width="400" height="300"></canvas>  
+</div>
+
+<script>
+    let canvas
+let ctx
+let webcamStream
+let video
+
+const constraints = {
+  video: true,
+  audio: false
+}
+
+const init = function () {
+  // obtain canvas context for drawing
+  canvas = document.getElementById('myCanvas')
+  ctx = canvas.getContext('2d')
+}
+
+// get user media and start capturing video streaming
+const startWebcam = async function () {
+  try {
+    if (!webcamStream) {
+      webcamStream = await navigator.mediaDevices.getUserMedia(constraints)
+      video = document.getElementById('myVideo')
+    }
+
+    if (typeof video.srcObject !== 'undefined') {
+      video.srcObject = webcamStream
+    } else {
+      video.src = URL.createObjectURL(webcamStream)
+    }
+
+    video.play()
+  } catch (err) {
+    console.error('error obtaining navigator.mediaDevices.getUserMedia')
+    console.error(err.message || err)
+    console.error('https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Browser_compatibility')
+  }
+}
+
+const stopWebcam = function () {
+  if (video && video.srcObject) {
+    const videoTracks = webcamStream.getVideoTracks()
+    videoTracks.forEach(track => {
+      track.stop()
+    })
+
+    if (typeof video.srcObject !== 'undefined') {
+      video.srcObject = null
+    } else {
+      video.src = null
+    }
+
+    webcamStream = null
+  }
+}
+
+// take a snap shot
+const takeSnapshot = function () {
+  // draw current image from the video onto the canvas
+  if (webcamStream) {
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+  }
+}
+
+const pauseVideo = function () {
+  if (video) {
+    video.pause()
+  }
+}
+
+const resumeVideo = function () {
+  if (video) {
+    video.play()
+  }
+}
+
+// flip web cam horizontally
+const toggleMirror = function () {
+  const checked = document.getElementById('mirrorCheckbox').checked
+  video.className = checked ? 'mirror' : ''
+  canvas.className = checked ? 'mirror' : ''
+}
+
+init() -->
+
+</script>
+    <script>
+        // Update activity status dynamically using JavaScript
+        // function updateActivityStatus(status) {
+        //     document.getElementById("activityStatus").innerText = status;
+        // }
+    </script>
+</body>
+</html>
